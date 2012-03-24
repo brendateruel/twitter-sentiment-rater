@@ -3,7 +3,7 @@
 mysql_connect('mysqlv103', 'brendateruel', 'Brenda2438');  
 mysql_select_db('twitter_sentiment');  
 
-require("twitteroauth/twitteroauth-xml.php");
+require("twitteroauth/twitteroauth.php");
 session_start();
 
 if(!empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret'])){  
