@@ -1,6 +1,6 @@
 ﻿<?php
 
-require("twitteroauth/twitteroauth.php");
+require("twitteroauth/twitteroauth-xml.php");
 session_start();
 
 // The TwitterOAuth instance  
