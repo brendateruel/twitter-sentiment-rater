@@ -1,6 +1,9 @@
 ﻿<?php
 
-require("twitteroauth/twitteroauth-xml.php");
+mysql_connect('mysqlv103', 'brendateruel', 'Brenda2438');  
+mysql_select_db('twitter_sentiment');
+
+require("twitteroauth/twitteroauth.php");
 session_start();
 
 print 'check the db now';
@@ -9,8 +12,14 @@ if(!empty($_SESSION['username'])){
     $twitteroauth = new TwitterOAuth('JlVI5JLcRgiHOX8LhUhCmw', 'AzFZeQZ7zhhN397iLSPNC36MUryUBPufvqt8i1NI', $_SESSION['oauth_token'], $_SESSION['oauth_secret']);  
 }  
 
-$home_timeline = $twitteroauth->get('statuses/home_timeline');  
+$home_timeline = $twitteroauth->get('statuses/home_timeline', array('count' => 1));  
 print_r($home_timeline);
+
+$query = mysql_query("INSERT INTO temp_timeline (user_handle) VALUES ('{$user_info->screen_name}')");  
+$query = mysql_query("SELECT * FROM temp_timeline");  
+$result = mysql_fetch_array($query);  
+
+print 'check table now';
 
 ?>
 
