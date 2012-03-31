@@ -15,10 +15,13 @@ if(!empty($_SESSION['username'])){
 $home_timeline = $twitteroauth->get('statuses/home_timeline', array('count' => 1));  
 $status = $home_timeline->status;
 $user = $status->user;
+$date_time = date("Y-m-d H:i:s", strtotime($status->created_at));
+
+echo $date_time;
 
 print_r($home_timeline);
 
-$query = mysql_query("INSERT INTO temp_timeline (user_handle) VALUES ('{$user->screen_name}')");  
+$query = mysql_query("INSERT INTO temp_timeline (user_handle, user_image_URL, status_id, date_time, tweet) VALUES ('{$user->screen_name}', '{$user->profile_image_url}', '{$status->id}', '{$date_time}', '{$status->text}')");  
 $query = mysql_query("SELECT * FROM temp_timeline");  
 $result = mysql_fetch_array($query);  
 
