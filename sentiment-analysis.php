@@ -22,11 +22,17 @@ $status_id = array();
 while ($result = mysql_fetch_assoc($tweet)) {
 	$text[] = $result['tweet'];
 	$status_id[] = $result['status_ID'];
+	$text2 = current($text);
+	$status_id2 = current($status_id);
+	$query = mysql_query("INSERT INTO test_import (field1, field2) VALUES ('{$text2}', '{$status_id2}')");
+	mysql_free_result($query);
 }
 print_r($text);
-
-
 print_r($status_id);
+
+
+
+
 
 $url = "http://www.viralheat.com/"
 
