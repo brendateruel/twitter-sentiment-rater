@@ -24,7 +24,37 @@ if (!$result) {
 // See also mysql_result(), mysql_fetch_array(), mysql_fetch_row(), etc.
 while ($row = mysql_fetch_assoc($result)) {
     echo $row['user_handle'];
+	echo "\n";
 }
+
+	echo "\n";
+
+mysql_free_result();
+
+$all = mysql_query("SELECT sentiment_score FROM temp_timeline WHERE user_handle='bergatron'");
+$solution=array();
+
+function average($solution){
+  return array_sum($solution)/count($solution) ;
+}
+
+while ($array = mysql_fetch_array($all)) {
+$solution[]=$array['sentiment_score'];
+}
+
+print_r($solution);
+echo array_sum($solution);
+echo "sum(a) = " . array_sum($solution) . "\n";
+echo "Average of array:".average($solution);
+
+
+	
+if (mysql_num_rows($all) > 0) {
+	echo "we're good";
+} else {
+	echo 'no values to fetch';
+}
+
 
 ?>
 
