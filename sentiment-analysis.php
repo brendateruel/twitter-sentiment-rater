@@ -14,21 +14,19 @@ mysql_select_db('twitter_sentiment');
     return $response;
   }
 
-$text = mysql_query("SELECT tweet FROM temp_timeline WHERE status_ID='186502375752728577'");  
-$text2 = array(1);
-while ($result = mysql_fetch_assoc($text)) {
-	$text2[] = $result;
+$tweet = mysql_query("SELECT tweet, status_ID FROM temp_timeline WHERE user_handle='bergatron'");  
+
+$text = array();
+$status_id = array();
+
+while ($result = mysql_fetch_assoc($tweet)) {
+	$text[] = $result['tweet'];
+	$status_id[] = $result['status_ID'];
 }
+print_r($text);
 
-$a = array();
-while ($result = mysql_fetch_assoc($text2)) {
-	$a[] = $result;
-}
 
-print_r($text2);
-
-$b = $a;
-print_r($b);
+print_r($status_id);
 
 $url = "http://www.viralheat.com/"
 
