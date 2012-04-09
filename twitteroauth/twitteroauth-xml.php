@@ -145,7 +145,7 @@ class TwitterOAuth {
   function get($url, $parameters = array()) {
     $response = $this->oAuthRequest($url, 'GET', $parameters);
     if ($this->format === 'xml' && $this->decode_xml) {
-      return xmlrpc_decode($response);
+      return simplexml_load_string($response);
     }
     return $response;
   }
